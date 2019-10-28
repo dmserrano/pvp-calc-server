@@ -5,17 +5,18 @@ const { router, ROUTES_MAP } = require("./router/");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ROUTE_PREFIX = "/api/v1";
 
 app.use(cors());
 app.use(morgan("dev"));
 
 
-app.get("/", (req, res) => {
+app.get(ROUTE_PREFIX, (req, res) => {
     const ROUTES = JSON.parse(JSON.stringify(ROUTES_MAP));
     res.json(ROUTES);
 });
 
-app.use(router);
+app.use(ROUTE_PREFIX, router);
 
 app.listen(PORT, () => {
     // eslint-disable-next-line
