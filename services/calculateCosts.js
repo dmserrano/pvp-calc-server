@@ -1,6 +1,6 @@
 const costs = require("./../data/costs");
 
-const calculateCosts = (currentLevel = 0, targetLevel = 0) => {
+const calculateCosts = (currentLevel = "1.5", targetLevel = "40") => {
     const currentAccumulatedLevel = `${Number(currentLevel - 0.5)}`;
     const currentTargetLevel = `${Number(targetLevel - 0.5)}`;
 
@@ -13,4 +13,6 @@ const calculateCosts = (currentLevel = 0, targetLevel = 0) => {
     };
 };
 
-console.log(calculateCosts("15", "33.5"));
+module.exports = {
+    calculateCosts,
+};
