@@ -4,7 +4,7 @@ const { handleGetIvSpread } = require("../controllers/ivSpread");
 const router = Router();
 
 const IV_SPREAD_ROUTE = {
-    path: "/ivspread",
+    path: "/iv-spread",
     methods: {
         GET: {
             queryParams: {

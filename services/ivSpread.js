@@ -3,11 +3,11 @@ const { calculateCosts } = require("./calculateCosts");
 const { IV_SPREAD_API_URL, IV_SPREAD_API_OPTIONS } = require("../constants/api");
 
 const getIvSpread = async ({
-    level = undefined,
+    level = "",
     ivs = "",
     pokemon = "",
 }) => {
-    const options = { ...IV_SPREAD_API_OPTIONS, qs: { pokemon, ivs, level } };
+    const options = { ...IV_SPREAD_API_OPTIONS, qs: { pokemon, ivs } };
     const {
         cp: targetCp,
         level: targetLevel,
@@ -17,7 +17,7 @@ const getIvSpread = async ({
     if (level && level > targetLevel) return null;
 
     return {
-        costs: calculateCosts(level, targetLevel),
+        costs: calculateCosts(level || undefined, targetLevel),
         ranks,
         targetCp,
         targetLevel,
@@ -25,7 +25,7 @@ const getIvSpread = async ({
 };
 
 const getBatchIvSpreads = async ({
-    level = undefined,
+    level = "",
     ivs = "",
     pokemon = "",
 }) => {
