@@ -1,31 +1,20 @@
 const { Router } = require("express");
-const { getOrderedEvolutionChain } = require("../services/pokeApi");
+const { handleGetEvolutionChain } = require("../controllers/pokeApi");
 
 const router = Router();
 
 const EVOLUTION_CHAIN_ROUTE = {
-    path: "/evolution-chain",
+    path: "/evolution-chain/:pokedexNumber",
     method: {
         GET: {
-            queryParams: {
+            params: {
                 pokedexNumber: "string",
             },
         },
     },
 };
 
-router.get(EVOLUTION_CHAIN_ROUTE.path, async ({
-    query: {
-        pokedexNumber = "1",
-    },
-}, res) => {
-    try {
-        const response = await getOrderedEvolutionChain(pokedexNumber);
-        res.json(response);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-});
+router.get(EVOLUTION_CHAIN_ROUTE.path, handleGetEvolutionChain);
 
 module.exports = {
     router,

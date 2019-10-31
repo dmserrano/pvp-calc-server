@@ -98,6 +98,4 @@ const getOrderedEvolutionChain = async (pokedexNumber = "1") => {
 
 module.exports = {
     getOrderedEvolutionChain,
-    getEvolutionChain,
-    getSpecies,
 };
