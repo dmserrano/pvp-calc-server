@@ -1,8 +1,8 @@
-const { getIvSpread } = require("../services/ivSpread");
+const { getBatchIvSpreads } = require("../services/ivSpread");
 
 const handleGetIvSpread = async ({ query }, res) => {
     try {
-        const response = await getIvSpread(query);
+        const response = await getBatchIvSpreads(query);
         res.json(response);
     } catch (error) {
         res.json({ error: error.message });

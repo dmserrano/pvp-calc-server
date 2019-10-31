@@ -24,6 +24,24 @@ const getIvSpread = async ({
     };
 };
 
+const getBatchIvSpreads = async ({
+    level = undefined,
+    ivs = "",
+    pokemon = "",
+}) => {
+    const pokemonList = pokemon.split(",");
+    const actions = pokemonList.map(
+        (pokemonName) => getIvSpread({ level, ivs, pokemon: pokemonName }),
+    );
+    const results = await Promise.all(actions);
+
+    return results.reduce((accumulator, result, index) => {
+        const pokemonName = pokemonList[index];
+        accumulator[pokemonName] = result;
+        return accumulator;
+    }, {});
+};
+
 module.exports = {
-    getIvSpread,
+    getBatchIvSpreads,
 };

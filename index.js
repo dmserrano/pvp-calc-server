@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const { router, ROUTES_MAP } = require("./router/");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const ROUTE_PREFIX = "/api/v1";
 
 app.use(cors());
