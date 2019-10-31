@@ -14,6 +14,8 @@ const getIvSpread = async ({
         ranks,
     } = await getRequest(IV_SPREAD_API_URL, options);
 
+    if (level && level > targetLevel) return null;
+
     return {
         costs: calculateCosts(level, targetLevel),
         ranks,
