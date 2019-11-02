@@ -5,7 +5,7 @@ const handleGetAllPokemon = async (req, res) => {
         const { pokemon } = await getGameData();
         res.json(pokemon);
     } catch (error) {
-        res.json({ error: error.message });
+        res.status(500).json("Could not fetch Pokemon");
     }
 };
 
@@ -14,7 +14,7 @@ const handleGetLeagueRankings = async ({ query }, res) => {
         const response = await getLeagueRankings(query);
         res.json(response);
     } catch (error) {
-        res.json({ error: error.message });
+        res.status(500).json("Could not fetch League Rankings");
     }
 };
 

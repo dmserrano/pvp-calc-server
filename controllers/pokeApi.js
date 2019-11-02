@@ -9,7 +9,7 @@ const handleGetEvolutionChain = async ({
         const response = await getOrderedEvolutionChain(pokedexNumber);
         res.json(response);
     } catch (error) {
-        res.json({ error: error.message });
+        res.status(500).json("Could not fetch Evolution Chain");
     }
 };
 
