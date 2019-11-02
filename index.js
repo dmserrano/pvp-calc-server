@@ -1,40 +1,28 @@
 const express = require("express");
 const cors = require("cors");
-const request = require("request-promise");
+const morgan = require("morgan");
+const { router, ROUTES_MAP } = require("./router/");
 
 const app = express();
+const PORT = process.env.PORT || 4000;
+const ROUTE_PREFIX = "/api/v1";
 
 app.use(cors());
+app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-    const routes = {
-        pvpoke: {
-            "/gamedata": ["GET"],
-        },
-    };
 
-    res.json(routes);
+app.get(ROUTE_PREFIX, (req, res) => {
+    const ROUTES = JSON.parse(JSON.stringify(ROUTES_MAP));
+    res.json(ROUTES);
 });
 
-app.get("/pvpoke/gamedata", async (req, res) => {
-    try {
-        const response = await request("https://pvpoke.com/data/gamemaster.json?v=173");
-        const parsedResponse = JSON.parse(response);
-        res.json(parsedResponse);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
+app.use(ROUTE_PREFIX, router);
+
+app.get("*", (req, res) => {
+    res.status(404).send("404: Route Not Found");
 });
 
-app.get("/ivspread", async (req, res) => {
-    const response = await request({
-        headers: { Accept: "application/json" },
-        uri: "https://ivservice.herokuapp.com/iv?pokemon=skuntank&ivs=6/13/11",
-    });
-    const parsedResponse = JSON.parse(response);
-    res.json(parsedResponse);
-});
-
-app.listen(80, () => {
-    console.log("CORS-enabled web server listening on port 80");
+app.listen(PORT, () => {
+    // eslint-disable-next-line
+    console.log("Web server listening on port " + PORT);
 });
