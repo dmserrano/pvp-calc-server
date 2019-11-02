@@ -18,6 +18,10 @@ app.get(ROUTE_PREFIX, (req, res) => {
 
 app.use(ROUTE_PREFIX, router);
 
+app.get("*", (req, res) => {
+    res.status(404).send("404: Route Not Found");
+});
+
 app.listen(PORT, () => {
     // eslint-disable-next-line
     console.log("Web server listening on port " + PORT);
