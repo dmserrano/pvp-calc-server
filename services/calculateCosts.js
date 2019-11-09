@@ -1,7 +1,7 @@
 const costs = require("./../data/costs");
 
 const calculateCosts = (currentLevel = "1", targetLevel = "40") => {
-    if (currentLevel < 1 || targetLevel < 40) return {};
+    if (currentLevel < 1 || targetLevel > 40) return {};
 
     const currentAccumulatedLevel = currentLevel > 1 ? `${Number(currentLevel - 0.5)}` : `${Number(currentLevel)}`;
     const currentTargetLevel = `${Number(targetLevel - 0.5)}`;
